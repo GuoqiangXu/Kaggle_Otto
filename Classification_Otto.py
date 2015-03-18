@@ -41,4 +41,5 @@ encoder = LabelEncoder().fit(y_train)
 X_test, ids = load_test_data()
 y_prob = clf.predict_proba(X_test)
 
+
 make_submission(y_prob,ids,encoder)
