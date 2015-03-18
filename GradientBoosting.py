@@ -3,12 +3,15 @@
 The default training and test file is under the same folder of this file. After 
 running, one submission file with default name MySubmission.csv is generated.
 
+This file uses gradient boosting classifier. 
+
 @author: guoqiangxu
 """
 
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
+from sklearn import preprocessing
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import LabelEncoder
 
 def load_train_data(path='train.csv'):
@@ -33,13 +36,26 @@ def make_submission(y_prob,ids,encoder,path='MySubmission.csv'):
             f.write(probas)
             f.write('\n')
     
+print(" - Start.")
+
 X_train, y_train = load_train_data()
-clf = RandomForestClassifier()
-clf.fit(X_train, y_train)
+scaler = preprocessing.StandardScaler().fit(X_train)
+trainDataScaled = scaler.transform(X_train)
+
+print(" - Data preprocessed.")
+
+clf = GradientBoostingClassifier()
+clf.fit(trainDataScaled, y_train)
 encoder = LabelEncoder().fit(y_train)
 
-X_test, ids = load_test_data()
-y_prob = clf.predict_proba(X_test)
+print(" - Model built.")
 
+X_test, ids = load_test_data()
+testDataScaled = scaler.transform(X_test)
+y_prob = clf.predict_proba(testDataScaled)
+
+print(" - Prediction made.")
 
 make_submission(y_prob,ids,encoder)
+
+print(" - Submission file generated.")
