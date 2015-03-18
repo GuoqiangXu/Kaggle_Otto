@@ -3,7 +3,8 @@
 The default training and test file is under the same folder of this file. After 
 running, one submission file with default name MySubmission.csv is generated.
 
-This file uses gradient boosting classifier. 
+This file uses gradient boosting classifier. With default setting, the Kaggle 
+score is 0.59382.
 
 @author: guoqiangxu
 """
