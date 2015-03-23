@@ -14,13 +14,13 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 
-def load_train_data(path='train.csv'):
+def load_train_data(path='../train.csv'):
     df = pd.read_csv(path)
     X = df.values
     X_train, y_train = X[:, 1:-1], X[:, -1]
     return X_train.astype(float), y_train.astype(str)
             
-def load_test_data(path='test.csv'):
+def load_test_data(path='../test.csv'):
     df = pd.read_csv(path)
     X = df.values
     X_test, ids = X[:, 1:], X[:, 0]
