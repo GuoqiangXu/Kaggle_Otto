@@ -26,7 +26,7 @@ def load_test_data(path='../test.csv'):
     X_test, ids = X[:, 1:], X[:, 0]
     return X_test.astype(float), ids.astype(str)
     
-def make_submission(y_prob,ids,encoder,path='MySubmission.csv'):
+def make_submission(y_prob,ids,encoder,path='../MySubmission.csv'):
     with open(path, 'w') as f:
         f.write('id,')
         f.write(','.join(encoder.classes_))
